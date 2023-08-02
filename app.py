@@ -2,9 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+import secrets
 
 app = Flask(__name__)
-app.secret_key = 'your secret key'
+app.secret_key = secrets.token_hex(32)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -99,4 +100,4 @@ def profile():
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000)
